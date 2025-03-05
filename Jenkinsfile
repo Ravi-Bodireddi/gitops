@@ -7,6 +7,16 @@ node {
         checkout scm
     }
 
+    stage('Build Maven'){
+        steps{
+            script{
+                withEnv(["PATH+MAVEN=${tool 'Maven 3.6.3'}/bin"]){
+                    sh 'mvn clean package'
+                }
+            }
+        }
+    }
+
     stage('Build image') {
   
        app = docker.build("ravibodireddi/employeeapp")
