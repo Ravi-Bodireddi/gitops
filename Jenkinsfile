@@ -1,4 +1,7 @@
 node {
+    tools{
+        maven 'Maven3'
+    }
     def app
 
     stage('Clone repository') {
@@ -7,15 +10,14 @@ node {
         checkout scm
     }
 
-    stage('Build Maven'){
+    stage('Build Jar'){
         steps{
-            script{
-                withEnv(["PATH+MAVEN=${tool 'Maven 3.6.3'}/bin"]){
+            
                     sh 'mvn clean package'
-                }
+        
             }
         }
-    }
+    
 
     stage('Build image') {
   
